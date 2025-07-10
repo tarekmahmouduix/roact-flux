@@ -107,6 +107,12 @@ local function applyProp(virtualNode, key, newValue, oldValue)
 	if newValue == oldValue then
 		return
 	end
+	
+	--renderer flux support
+	if key == "Style" then
+		require(script.Parent.Flux.applyStyles)(virtualNode.hostObject, newValue)
+		return
+	end
 
 	if key == Ref or key == Children then
 		-- Refs and children are handled in a separate pass
